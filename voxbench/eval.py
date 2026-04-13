@@ -264,8 +264,59 @@ def delong_p(y_true: np.ndarray,
 
 
 def load_submission(path: str | Path) -> dict:
-    """Load a submission JSON. Raises on schema violations."""
+    """Load a submission file.
+
+    Supports two formats:
+
+    1. **JSON** (full submission with metadata): must contain
+       ``task_id``, ``seed``, ``subject_probs`` (dict of subject_id
+       -> probability). Canonical submission format for the hosted
+       leaderboard.
+
+    2. **CSV** (lightweight per-seed predictions, as shipped in
+       ``predictions/``): exactly two columns
+       ``subject_id,predicted_prob``. Filename is parsed as
+       ``<task_id>.seed<s>.<baseline>.csv`` to recover metadata.
+
+    Both paths return a dict with the three canonical keys.
+    """
     path = Path(path)
+    if path.suffix.lower() == ".csv":
+        import csv as _csv
+        import re as _re
+
+        m = _re.match(r"^(.+)\.seed(\d+)\.(.+)\.csv$", path.name)
+        task_id, seed = (m.group(1), int(m.group(2))) if m else (path.stem, 0)
+        subject_probs: dict[str, float] = {}
+        with path.open(newline="") as f:
+            rdr = _csv.DictReader(f)
+            if rdr.fieldnames is None or "subject_id" not in rdr.fieldnames:
+                raise ValueError(
+                    f"CSV submission {path} must have a 'subject_id' column; "
+                    f"found {rdr.fieldnames}"
+                )
+            prob_col = next(
+                (c for c in rdr.fieldnames
+                 if c in ("predicted_prob", "prob", "probability", "pred")),
+                None,
+            )
+            if prob_col is None:
+                raise ValueError(
+                    f"CSV submission {path} must have one of "
+                    f"(predicted_prob/prob/probability/pred); "
+                    f"found {rdr.fieldnames}"
+                )
+            for row in rdr:
+                sid = row["subject_id"]
+                try:
+                    subject_probs[sid] = float(row[prob_col])
+                except (TypeError, ValueError):
+                    raise ValueError(
+                        f"CSV submission {path}: non-numeric probability "
+                        f"for subject {sid!r}: {row[prob_col]!r}"
+                    )
+        return {"task_id": task_id, "seed": seed, "subject_probs": subject_probs}
+
     with path.open() as f:
         payload = json.load(f)
     required = {"task_id", "seed", "subject_probs"}

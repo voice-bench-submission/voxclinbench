@@ -34,7 +34,46 @@ def _cmd_fetch(args: argparse.Namespace) -> int:
     return 0
 
 
+def _load_labels(path: Path) -> dict[str, int]:
+    """Load subject-level labels from a CSV (subject_id,label).
+
+    Labels are user-supplied from the credentialed upstream corpus;
+    VoxClinBench does not redistribute labels (see SUBMISSION.md).
+    """
+    import csv as _csv
+    labels: dict[str, int] = {}
+    with path.open(newline="") as f:
+        rdr = _csv.DictReader(f)
+        if rdr.fieldnames is None or "subject_id" not in rdr.fieldnames:
+            raise ValueError(
+                f"labels file {path} must have a 'subject_id' column")
+        lab_col = next(
+            (c for c in rdr.fieldnames if c in ("label", "y_true", "y", "target")),
+            None)
+        if lab_col is None:
+            raise ValueError(
+                f"labels file {path} must have one of (label/y_true/y/target)")
+        for row in rdr:
+            labels[row["subject_id"]] = int(row[lab_col])
+    return labels
+
+
+def _join_subject_probs(subject_probs, labels: dict[str, int]) -> list[dict]:
+    """Join {subject_id: prob} with {subject_id: label} → list for evaluate_task."""
+    if isinstance(subject_probs, dict):
+        out = []
+        for sid, prob in subject_probs.items():
+            if sid in labels:
+                out.append({"y_true": labels[sid], "y_prob": float(prob)})
+        if not out:
+            raise ValueError("no subject_id overlap between predictions and labels")
+        return out
+    # already a list of {y_true, y_prob}
+    return list(subject_probs)
+
+
 def _cmd_eval(args: argparse.Namespace) -> int:
+    labels = _load_labels(Path(args.labels)) if args.labels else None
     if args.all:
         if not args.predictions_dir:
             print("--all requires --predictions-dir", file=sys.stderr)
@@ -44,10 +83,15 @@ def _cmd_eval(args: argparse.Namespace) -> int:
         for tid in list_task_ids():
             path = preds_dir / f"{tid}.json"
             if not path.exists():
-                print(f"[skip] {tid}: no submission at {path}")
-                continue
+                path = preds_dir / f"{tid}.seed0.main.csv"
+                if not path.exists():
+                    print(f"[skip] {tid}: no submission at {path}")
+                    continue
             submission = load_submission(path)
-            res = evaluate_task(tid, submission["subject_probs"])
+            sp = submission["subject_probs"]
+            if labels is not None and isinstance(sp, dict):
+                sp = _join_subject_probs(sp, labels)
+            res = evaluate_task(tid, sp)
             results.append({
                 "task_id": res.task_id,
                 "auroc": res.auroc,
@@ -65,7 +109,15 @@ def _cmd_eval(args: argparse.Namespace) -> int:
               file=sys.stderr)
         return 2
     submission = load_submission(args.predictions)
-    res = evaluate_task(args.task, submission["subject_probs"])
+    sp = submission["subject_probs"]
+    if labels is not None and isinstance(sp, dict):
+        sp = _join_subject_probs(sp, labels)
+    elif isinstance(sp, dict):
+        print("--predictions gave per-subject probabilities without labels; "
+              "pass --labels <csv> (subject_id,label) from your upstream "
+              "corpus so the harness can score.", file=sys.stderr)
+        return 2
+    res = evaluate_task(args.task, sp)
     print(json.dumps({
         "task_id": res.task_id,
         "auroc": res.auroc,
@@ -116,6 +168,9 @@ def main(argv: list[str] | None = None) -> int:
     p_eval.add_argument("--predictions", default=None)
     p_eval.add_argument("--all", action="store_true")
     p_eval.add_argument("--predictions-dir", default=None)
+    p_eval.add_argument("--labels", default=None,
+                        help="CSV of subject_id,label from upstream corpus "
+                             "(required if --predictions is a CSV without labels)")
     p_eval.add_argument("--out", default=None)
     p_eval.set_defaults(func=_cmd_eval)
 
