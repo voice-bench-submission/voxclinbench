@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use VoxClinBench, please cite the companion paper."
+title: "VoxClinBench"
+version: "0.1.0"
+date-released: "2026-04-12"
+license: MIT
+repository-code: "https://github.com/voice-bench-submission/voxclinbench"
+authors:
+  - family-names: "Anonymous"
+    given-names: "VoxClinBench Contributors"
+preferred-citation:
+  type: article
+  title: "VoxClinBench: A Cross-Lingual, Cross-Disease Clinical Voice Biomarker Benchmark"
+  authors:
+    - family-names: "Anonymous"
+  year: 2026

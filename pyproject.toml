@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voxbench"
+version = "0.2.0-dev"
+description = "VoxClinBench — cross-lingual, cross-disease clinical voice biomarker benchmark"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "VoxClinBench Contributors" }]
+keywords = ["benchmark", "voice", "clinical", "ssl", "bridge2ai"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scikit-learn>=1.2",
+  "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.3"]
+
+[project.scripts]
+voxbench = "voxbench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["voxbench*"]
+
+[tool.setuptools.package-data]
+voxbench = ["splits/*.json"]
