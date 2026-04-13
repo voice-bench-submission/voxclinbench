@@ -10,12 +10,12 @@ four languages (en, es, de, zh), 22 tasks split into two sub-leaderboards
 ```bash
 pip install -e .
 
-voxbench fetch bridge2ai        # PhysioNet credentialing required
-voxbench fetch daicwoz          # USC/ICT EULA required
-voxbench fetch neurovoz         # CC BY 4.0, no gate
-voxbench fetch modma            # CC BY-NC 4.0 form
-voxbench fetch svd              # Saarland access form
-voxbench fetch edaic            # USC/ICT EULA (AVEC'19)
+voxbench fetch bridge2ai        # PhysioNet credentialed (hard login wall)
+voxbench fetch daicwoz          # USC/ICT EULA (HTTP public; EULA on download)
+voxbench fetch edaic            # USC/ICT EULA (AVEC'19, same arrangement)
+voxbench fetch svd              # CC BY 4.0 Zenodo mirror (publicly downloadable)
+voxbench fetch neurovoz         # CC BY-NC-ND 4.0 (Zenodo access request)
+voxbench fetch modma            # CC BY-NC 4.0 (Lanzhou University form)
 
 voxbench eval --task b2ai.parkinsons --predictions my_preds.json
 voxbench eval --all --predictions-dir ./runs/ --out leaderboard_row.json

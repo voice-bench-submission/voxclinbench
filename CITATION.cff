@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use VoxClinBench, please cite the companion paper."
 title: "VoxClinBench"
-version: "0.1.0"
-date-released: "2026-04-12"
+version: "0.2.0"
+date-released: "2026-04-13"
 license: MIT
 repository-code: "https://github.com/voice-bench-submission/voxclinbench"
 authors:
@@ -14,3 +14,4 @@ preferred-citation:
   authors:
     - family-names: "Anonymous"
   year: 2026
+  notes: "Under double-blind review at NeurIPS 2026 Evaluations & Datasets Track. Author identity disclosed on de-anonymisation."
