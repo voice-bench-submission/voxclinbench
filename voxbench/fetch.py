@@ -83,11 +83,20 @@ def check_credentials(source: CorpusSource) -> None:
 
 
 def fetch(dataset: str, target: Path | str | None = None) -> Path:
-    """Fetch the named corpus after verifying credentials.
+    """Document the fetch flow for a named corpus.
 
-    TODO: wire per-corpus downloaders. For now this function validates
-    credentials, prints the official URL and license, and returns the
-    target path where the user should place audio manually.
+    This function validates your credentials (where applicable) and
+    prints the official upstream URL plus the target path where you
+    should place the downloaded audio. It deliberately does NOT bundle
+    or proxy the audio: each upstream provider runs its own credential
+    flow (PhysioNet DUA, USC/ICT EULA, Saarland form, Lanzhou form, or
+    CC-licensed Zenodo for NeuroVoz) and VoxClinBench respects that
+    boundary rather than caching files on our side.
+
+    For the open-licensed NeuroVoz corpus a one-shot downloader is a
+    natural extension and is tracked as a v0.3 follow-up (the
+    canonical Zenodo record and file naming moved between releases;
+    we intentionally do not hard-code a stale URL here).
     """
     if dataset not in SOURCES:
         raise KeyError(
@@ -101,6 +110,7 @@ def fetch(dataset: str, target: Path | str | None = None) -> Path:
     print(f"[voxbench] Access:  {source.access}")
     print(f"[voxbench] Source:  {source.url}")
     print(f"[voxbench] Target:  {target_path}")
-    print("[voxbench] TODO: per-corpus downloader not yet implemented; "
-          "please fetch from the official URL above into the target path.")
+    print("[voxbench] Per-corpus downloaders are tracked as v0.3 work; "
+          "download audio from the URL above into the target path once "
+          "your credentials are approved.")
     return target_path
