@@ -1,16 +1,21 @@
-"""Download-on-use CLI for restricted datasets.
+"""Download-on-use CLI for VoxClinBench source corpora.
 
-Each corpus has its own credential gate:
-- bridge2ai: PhysioNet Credentialed Health Data License 1.5.0
-- daicwoz, edaic: USC/ICT EULA
-- modma: Lanzhou University application form (CC BY-NC 4.0)
-- svd: Saarland access form
-- neurovoz: CC BY 4.0 (public, no gate)
+Access gates (most to least restrictive):
+- bridge2ai:       PhysioNet credentialed; hard login wall; DUA required.
+- modma:           Lanzhou University application form (CC BY-NC 4.0).
+- neurovoz:        CC BY-NC-ND 4.0; Zenodo access request (files restricted).
+- daicwoz, edaic:  USC/ICT EULA governs USE; files HTTP-reachable at
+                   dcapswoz.ict.usc.edu without login — the EULA at
+                   the same site auto-applies on download.
+- svd:             CC BY 4.0 Zenodo mirror (records 16874898 + 7024894);
+                   files publicly downloadable without any gate.
 
-This module intentionally does NOT bundle raw audio. It validates that
-the user has credentials and then points them at the official source.
-TODO: implement per-corpus resumable downloaders once EULA acceptance
-flow is finalised with each provider.
+This module intentionally does NOT bundle raw audio: each provider has
+its own redistribution policy, and respecting that boundary is what
+makes VoxClinBench safe to submit under each corpus's DUA. The
+function below validates credential env vars (when applicable) and
+prints the official URL plus target path; the actual HTTP download
+per corpus is tracked as v0.3 work.
 """
 
 from __future__ import annotations
@@ -39,28 +44,28 @@ SOURCES: dict[str, CorpusSource] = {
     ),
     "neurovoz": CorpusSource(
         name="NeuroVoz",
-        license="CC BY 4.0",
-        access="public",
-        url="https://zenodo.org/records/10777657",
+        license="CC BY-NC-ND 4.0",
+        access="Zenodo access request (files are restricted)",
+        url="https://doi.org/10.5281/zenodo.10777657",
     ),
     "svd": CorpusSource(
         name="Saarbruecken Voice Database",
-        license="Research use (informal)",
-        access="Saarland access form",
-        url="https://stimmdb.coli.uni-saarland.de/",
+        license="CC BY 4.0 (Zenodo mirror)",
+        access="public",
+        url="https://doi.org/10.5281/zenodo.16874898",
     ),
     "daicwoz": CorpusSource(
         name="DAIC-WOZ",
-        license="USC/ICT EULA",
-        access="Signed EULA (daicwoz@ict.usc.edu)",
-        url="https://dcapswoz.ict.usc.edu/",
+        license="USC/ICT EULA (use governed; files HTTP-reachable)",
+        access="EULA auto-applies on download from dcapswoz.ict.usc.edu",
+        url="https://dcapswoz.ict.usc.edu/wwwdaicwoz/",
         credential_env="USC_EULA_ACCEPTED",
     ),
     "edaic": CorpusSource(
         name="E-DAIC (AVEC'19)",
-        license="USC/ICT EULA",
-        access="Signed EULA (daicwoz@ict.usc.edu)",
-        url="https://dcapswoz.ict.usc.edu/extended-daic-woz/",
+        license="USC/ICT EULA (use governed; files HTTP-reachable)",
+        access="EULA auto-applies on download from dcapswoz.ict.usc.edu",
+        url="https://dcapswoz.ict.usc.edu/wwwedaic/",
         credential_env="USC_EULA_ACCEPTED",
     ),
     "modma": CorpusSource(
