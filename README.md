@@ -5,21 +5,53 @@ Six corpora (Bridge2AI-Voice v3.0, NeuroVoz, SVD, DAIC-WOZ, E-DAIC, MODMA),
 four languages (en, es, de, zh), 22 tasks split into two sub-leaderboards
 (Family A: physical/motor/laryngeal/respiratory; Family B: psychiatric).
 
-## Quickstart
+## Two workflows
+
+**A. Submit your own model (most users).** Run your model with your
+own preprocessing pipeline, write a two-column
+``subject_id,predicted_prob`` CSV per (task, seed), and score it:
 
 ```bash
-pip install -e .
+pip install voxbench          # pure numpy + scipy + sklearn, no torch
 
-voxbench fetch bridge2ai        # PhysioNet credentialed (hard login wall)
-voxbench fetch daicwoz          # USC/ICT EULA (HTTP public; EULA on download)
-voxbench fetch edaic            # USC/ICT EULA (AVEC'19, same arrangement)
-voxbench fetch svd              # CC BY 4.0 Zenodo mirror (publicly downloadable)
-voxbench fetch neurovoz         # CC BY-NC-ND 4.0 (Zenodo access request)
-voxbench fetch modma            # CC BY-NC 4.0 (Lanzhou University form)
+voxbench fetch <corpus>       # print official URL + target path
 
-voxbench eval --task b2ai.parkinsons --predictions my_preds.json
-voxbench eval --all --predictions-dir ./runs/ --out leaderboard_row.json
+# ... run YOUR model, write predictions/b2ai.parkinsons.seed0.mine.csv ...
+
+voxbench eval --task b2ai.parkinsons \
+    --predictions predictions/b2ai.parkinsons.seed0.mine.csv \
+    --labels your_b2ai_labels.csv
 voxbench compare --a baseline.json --b mine.json --test delong
+```
+
+Voxbench does **not** care how you produced the predictions — no
+requirement to use our preprocessing, our SSL probe, or our
+architecture.
+
+**B. Reproduce / extend our VoxClinBench-Base baseline.** If you want
+to retrain the 7-branch CNN-Transformer we report in the paper
+(``VoxClinBench-Base`` column of Table 2), install the full
+training stack and invoke our Modal harness:
+
+```bash
+pip install "voxbench[train]"   # torch + transformers + librosa + h5py + modal
+python -m voxbench.train --help
+```
+
+The preprocessing recipe (mel / MFCC / PPG / EMA / prosody / static /
+SSL / clinical features → HDF5) is in ``voxbench.data.features`` and
+``voxbench.data.dataset``. Running it requires a Modal credential
+and the credentialed upstream corpus.
+
+## fetch corpus table
+
+```
+bridge2ai      PhysioNet credentialed (hard login wall)
+daicwoz        USC/ICT EULA (HTTP public; EULA on download)
+edaic          USC/ICT EULA (AVEC'19)
+svd            CC BY 4.0 Zenodo mirror (publicly downloadable)
+neurovoz       CC BY-NC-ND 4.0 (Zenodo access request)
+modma          CC BY-NC 4.0 (Lanzhou University form)
 ```
 
 ## Task list

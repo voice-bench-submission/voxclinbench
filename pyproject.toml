@@ -24,6 +24,21 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7", "ruff>=0.3"]
+# Installing `voxbench[train]` pulls in the heavy deps required to run
+# our reference baseline's training and preprocessing (data/ + model/ +
+# training/ + train.py). Submitters bringing their OWN model do not
+# need this extra — ``voxbench eval`` is pure numpy/sklearn/scipy.
+train = [
+  "torch>=2.0",
+  "transformers>=4.40",
+  "librosa>=0.10",
+  "resampy>=0.4",
+  "soundfile>=0.12",
+  "h5py>=3.10",
+  "pandas>=2.0",
+  "tqdm>=4.66",
+  "modal>=0.65",
+]
 
 [project.scripts]
 voxbench = "voxbench.cli:main"
