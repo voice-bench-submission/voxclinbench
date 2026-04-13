@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Phase 2 extractor: assemble canonical prediction CSVs for VoxClinBench release.
 
-Input:  artifacts/modal_sync/
-Output: /tmp/voxclinbench-release/predictions/<task_id>.seed<s>.<baseline>.csv
+Input:  $VOXBENCH_ARTIFACTS (default: ./artifacts/modal_sync/)
+Output: $VOXBENCH_RELEASE/predictions/<task_id>.seed<s>.<baseline>.csv
+         (default output root: ./release/)
          with columns: subject_id,predicted_prob
-Also writes /tmp/voxclinbench-release/predictions/INDEX.md summarising coverage.
+Also writes $VOXBENCH_RELEASE/predictions/INDEX.md summarising coverage.
 
 Safety:
 - DROPS any column named target / label / diagnosis / phq8 / age / sex /
@@ -21,8 +22,8 @@ import re
 import sys
 from pathlib import Path
 
-ARTIFACTS = Path("artifacts/modal_sync")
-OUT_ROOT = Path("/tmp/voxclinbench-release")
+ARTIFACTS = Path(os.environ.get("VOXBENCH_ARTIFACTS", "./artifacts/modal_sync")).resolve()
+OUT_ROOT = Path(os.environ.get("VOXBENCH_RELEASE", "./release")).resolve()
 OUT_PRED = OUT_ROOT / "predictions"
 OUT_PRED.mkdir(parents=True, exist_ok=True)
 

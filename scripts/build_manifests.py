@@ -15,12 +15,14 @@ refer users to a reproducible regeneration path for the rest.
 from __future__ import annotations
 import csv
 import json
+import os
 import re
 from collections import defaultdict
 from pathlib import Path
 
-PRED_DIR = Path("voxbench/predictions")
-OUT_DIR = Path("voxbench/splits")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+PRED_DIR = Path(os.environ.get("VOXBENCH_PREDICTIONS", REPO_ROOT / "predictions")).resolve()
+OUT_DIR = Path(os.environ.get("VOXBENCH_SPLITS", REPO_ROOT / "splits")).resolve()
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Group predictions by (task, seed) — one manifest per (task, seed),
