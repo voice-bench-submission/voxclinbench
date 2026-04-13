@@ -135,9 +135,28 @@ def _cmd_compare(args: argparse.Namespace) -> int:
     if a["task_id"] != b["task_id"]:
         print("submissions target different tasks", file=sys.stderr)
         return 2
-    y_true = np.asarray([s["y_true"] for s in a["subject_probs"]], dtype=int)
-    probs_a = np.asarray([s["y_prob"] for s in a["subject_probs"]], dtype=float)
-    probs_b = np.asarray([s["y_prob"] for s in b["subject_probs"]], dtype=float)
+    sa, sb = a["subject_probs"], b["subject_probs"]
+    # CSV submissions produce dict {sid: prob}; join with labels to
+    # reconstruct the list-of-dicts shape expected by delong/bootstrap.
+    if isinstance(sa, dict) or isinstance(sb, dict):
+        if not args.labels:
+            print("--a or --b is a CSV without labels; pass --labels "
+                  "<csv> (subject_id,label) from your upstream corpus.",
+                  file=sys.stderr)
+            return 2
+        labels = _load_labels(Path(args.labels))
+        common = sorted(set(sa) & set(sb) & set(labels))
+        if not common:
+            print("no subject_id overlap across predictions and labels",
+                  file=sys.stderr)
+            return 2
+        y_true = np.asarray([labels[s] for s in common], dtype=int)
+        probs_a = np.asarray([float(sa[s]) for s in common], dtype=float)
+        probs_b = np.asarray([float(sb[s]) for s in common], dtype=float)
+    else:
+        y_true = np.asarray([s["y_true"] for s in sa], dtype=int)
+        probs_a = np.asarray([s["y_prob"] for s in sa], dtype=float)
+        probs_b = np.asarray([s["y_prob"] for s in sb], dtype=float)
     if args.test == "delong":
         auc_diff, p = delong_p(y_true, probs_a, probs_b)
     elif args.test == "paired-bootstrap":
@@ -177,6 +196,9 @@ def main(argv: list[str] | None = None) -> int:
     p_cmp = sub.add_parser("compare")
     p_cmp.add_argument("--a", required=True)
     p_cmp.add_argument("--b", required=True)
+    p_cmp.add_argument("--labels", default=None,
+                       help="CSV of subject_id,label from upstream "
+                            "corpus (required when --a/--b are CSVs)")
     p_cmp.add_argument("--test", default="delong",
                        choices=["delong", "paired-bootstrap"])
     p_cmp.set_defaults(func=_cmd_compare)

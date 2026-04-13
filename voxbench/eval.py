@@ -48,9 +48,16 @@ def _pr_auc(y_true: np.ndarray, y_prob: np.ndarray) -> float:
 def bootstrap_ci(y_true: np.ndarray, y_prob: np.ndarray,
                  resamples: int = BOOTSTRAP_RESAMPLES,
                  seed: int = BOOTSTRAP_SEED) -> tuple[float, float]:
-    """Subject-level bootstrap CI for AUROC. Returns (lo, hi) at 95%."""
-    rng = np.random.default_rng(seed)
+    """Subject-level bootstrap CI for AUROC. Returns (lo, hi) at 95%.
+
+    Degenerates gracefully when the test set is too small to bootstrap
+    meaningfully (N<2 or single-class): returns (nan, nan) instead of
+    raising. Callers should treat that as ``CI unavailable``.
+    """
     n = len(y_true)
+    if n < 2 or len(np.unique(y_true)) < 2:
+        return float("nan"), float("nan")
+    rng = np.random.default_rng(seed)
     scores = np.empty(resamples, dtype=np.float64)
     for i in range(resamples):
         idx = rng.integers(0, n, size=n)
@@ -59,6 +66,8 @@ def bootstrap_ci(y_true: np.ndarray, y_prob: np.ndarray,
             continue
         scores[i] = _roc_auc(y_true[idx], y_prob[idx])
     scores = scores[~np.isnan(scores)]
+    if scores.size == 0:
+        return float("nan"), float("nan")
     lo, hi = np.quantile(scores, [0.025, 0.975])
     return float(lo), float(hi)
 
