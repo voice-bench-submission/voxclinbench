@@ -2,15 +2,16 @@
 
 Two baselines are packaged:
 
-- MARVEL: WavLM-Large mean-pooled + LogReg, frozen. See
-  scripts/eval_marvel.py in the parent repo for the reference
-  implementation. TODO: port as a minimal wrapper that consumes
-  precomputed WavLM embeddings.
+- MARVEL: WavLM-Large mean-pooled + LogReg, frozen. The reference
+  implementation ships alongside this package under
+  `voxbench.baselines.marvel` (TODO). TODO: port as a minimal wrapper
+  that consumes precomputed WavLM embeddings.
 
 - VoxClinBench-Base: 8-modality CNN-Transformer with Griffin-Lim bridge.
-  See scripts/train_multimodal_b2ai.py in the parent repo for the
-  reference implementation. TODO: ship a minimal inference wrapper that
-  loads the released state_dict and emits submission JSONs.
+  The reference training harness ships as `voxbench.train`; see the
+  paper supplementary §B for the original ablation scripts. TODO: ship
+  a minimal inference wrapper that loads the released state_dict and
+  emits submission JSONs.
 
 Both wrappers are TODOs; the scaffolding below defines the expected API
 so the main `voxbench eval` entrypoint can dispatch to either baseline

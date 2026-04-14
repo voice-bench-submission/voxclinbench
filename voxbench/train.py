@@ -14,7 +14,7 @@ reproduce / extend VoxClinBench-Base have the full training harness.
 Running it requires a Modal credential and the credentialed upstream
 corpus (PhysioNet for B2AI).
 
-Bridge2AI-Voice v3.0.0 — Multi-Task Disease Classifier
+Multi-task disease classifier for the VoxClinBench Tier-2 panel.
 7-branch CNN-Transformer architecture trained on Modal cloud GPUs.
 
 This file is the Modal shell: it owns the app / image / volume declarations
@@ -136,8 +136,8 @@ def _build_fair_subset(
 
 _WANDB_KEY = os.environ.get("WANDB_API_KEY", "")
 
-app    = modal.App("b2ai-voice-train")
-volume = modal.Volume.from_name("b2ai-voice-data")
+app    = modal.App(os.environ.get("VOXBENCH_MODAL_APP", "voxclinbench-train"))
+volume = modal.Volume.from_name(os.environ.get("VOXBENCH_MODAL_VOLUME", "voxclinbench-data"))
 image  = modal.Image.from_registry(
     "pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime"
 ).pip_install([
@@ -600,7 +600,7 @@ def train_model(
     use_wandb = bool(os.environ.get("WANDB_API_KEY", ""))
     if use_wandb:
         _wandb.init(
-            project="bridge2ai-voice",
+            project=os.environ.get("VOXBENCH_WANDB_PROJECT", "voxclinbench"),
             name=f"tier{tier}{run_suffix}-{snap_ts}",
             config={
                 **cfg,

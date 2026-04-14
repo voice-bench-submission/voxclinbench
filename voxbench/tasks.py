@@ -81,7 +81,7 @@ TASKS: tuple[Task, ...] = (
          "Depression (PHQ-8>=10)",     "AUROC", None,    82,   193),
     Task("edaic.phq8_regression",    "B", "within", "edaic",     "en",
          "PHQ-8 score regression",     "Pearson_r", "CCC", None, None,
-         notes="Baseline pending (see paper/voxbench_spec.md §A16b)."),
+         notes="Baseline pending (see paper supplementary §A16b)."),
     Task("modma.depression",         "B", "within", "modma",     "zh",
          "MDD vs healthy control",     "AUROC", None,    23,   29),
     # --- Cross-lingual LODO ---

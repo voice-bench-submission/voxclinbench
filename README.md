@@ -1,6 +1,9 @@
 # VoxClinBench
 
 First cross-lingual, cross-disease clinical voice biomarker benchmark.
+The benchmark pairs a voice-generalist leaderboard with a language-shift
+falsification test, so that accuracy on a single corpus cannot be
+mistaken for cross-population generalization.
 Six corpora (Bridge2AI-Voice v3.0, NeuroVoz, SVD, DAIC-WOZ, E-DAIC, MODMA),
 four languages (en, es, de, zh), 22 tasks split into two sub-leaderboards
 (Family A: physical/motor/laryngeal/respiratory; Family B: psychiatric).
@@ -56,8 +59,8 @@ modma          CC BY-NC 4.0 (Lanzhou University form)
 
 ## Task list
 
-22 tasks defined in `voxbench/tasks.py`; see `paper/voxbench_spec.md` in
-the parent repo for the full catalogue.
+22 tasks defined in `voxbench/tasks.py`; the paper's supplementary §A
+gives the full catalogue with task-level statistics.
 
 | Family | Within-corpus | LODO | Example conditions |
 |---|---|---|---|
