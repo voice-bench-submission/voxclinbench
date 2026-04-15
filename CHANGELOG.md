@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.1 (2026-04-14)
+
+CLGP dual-family reframe; DAIC-WOZ + depression LODO B2-B5 retracted
+(189/189 E-DAIC overlap); task count corrected 17 -> 18 live
+(16 within-corpus + 2 LODO); benchmark paper v3 PDFs shipped under
+`paper/main_voxbench.pdf` and `paper/supplementary_voxbench.pdf`.
+
+### Task registry cleanup (2026-04-14)
+- **Hard-deleted 5 retracted task entries** from `voxbench/tasks.py`:
+  - `daicwoz.depression` (A15): retracted because DAIC-WOZ subjects are a
+    strict subset of E-DAIC (189/189 overlap), making it non-independent.
+  - `lodo.dep.test_b2ai` (B2), `lodo.dep.test_daic` (B3),
+    `lodo.dep.test_edaic` (B4), `lodo.dep.test_modma` (B5): depression
+    LODO family contaminated by the DAIC-WOZ subset of E-DAIC and by
+    target corpora appearing in the train set. Superseded by A9, A16a,
+    A17 within-corpus results.
+- Task count: 23 -> 18 live (16 within-corpus + 2 LODO: B1 PD EN->ES on
+  NeuroVoz, B6 VFP EN->DE on SVD).
+- Retraction ledger preserved in paper/voxbench_paper/snippets/task_card.tex
+  and supp \S\ref{sec:lodo-audit}; audit trail available via git history.
+
 ## 0.2.0 (2026-04-13)
 
 ### Release content
