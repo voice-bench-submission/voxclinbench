@@ -4,9 +4,11 @@ First cross-lingual, cross-disease clinical voice biomarker benchmark.
 The benchmark pairs a voice-generalist leaderboard with a language-shift
 falsification test, so that accuracy on a single corpus cannot be
 mistaken for cross-population generalization.
-Six corpora (Bridge2AI-Voice v3.0, NeuroVoz, SVD, DAIC-WOZ, E-DAIC, MODMA),
-four languages (en, es, de, zh), 22 tasks split into two sub-leaderboards
-(Family A: physical/motor/laryngeal/respiratory; Family B: psychiatric).
+Five corpora (Bridge2AI-Voice v3.0, NeuroVoz, SVD, E-DAIC, MODMA),
+four languages (en, es, de, zh), 18 live tasks (16 within-corpus + 2
+cross-lingual LODO) split into two sub-leaderboards (Family A:
+physical/motor/laryngeal/respiratory; Family B: psychiatric).
+DAIC-WOZ was retired (189/189 subset of E-DAIC); see CHANGELOG.
 
 ## Two workflows
 
@@ -50,8 +52,7 @@ and the credentialed upstream corpus.
 
 ```
 bridge2ai      PhysioNet credentialed (hard login wall)
-daicwoz        USC/ICT EULA (HTTP public; EULA on download)
-edaic          USC/ICT EULA (AVEC'19)
+edaic          USC/ICT EULA (AVEC'19; subsumes the retired DAIC-WOZ cohort)
 svd            CC BY 4.0 Zenodo mirror (publicly downloadable)
 neurovoz       CC BY-NC-ND 4.0 (Zenodo access request)
 modma          CC BY-NC 4.0 (Lanzhou University form)
@@ -59,13 +60,15 @@ modma          CC BY-NC 4.0 (Lanzhou University form)
 
 ## Task list
 
-22 tasks defined in `voxbench/tasks.py`; the paper's supplementary §A
-gives the full catalogue with task-level statistics.
+18 live tasks defined in `voxbench/tasks.py` (A15 daicwoz.depression and
+B2-B5 depression LODO retracted after the 189/189 DAIC-WOZ subset audit;
+see CHANGELOG). The paper's supplementary §A gives the full catalogue
+with task-level statistics.
 
 | Family | Within-corpus | LODO | Example conditions |
 |---|---|---|---|
 | A (physical) | 10 | 2 | PD (en/es), VFP (en/de), iSGS, laryngeal dystonia, MCI, benign lesions, MTD, chronic cough |
-| B (psychiatric) | 7 | 3 | depression (en/zh), PTSD, ADHD, PHQ-8 regression |
+| B (psychiatric) | 6 | 0 | depression (B2AI, E-DAIC, MODMA zero-shot target), PTSD, ADHD, PHQ-8 regression |
 
 B2AI's composite "prior psychiatric history" label is intentionally
 excluded: it overlaps depression/PTSD/ADHD in the same cohort and is not

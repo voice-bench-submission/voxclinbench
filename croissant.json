@@ -1,0 +1,149 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "sc": "https://schema.org/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "VoxClinBench",
+  "description": "VoxClinBench is the first cross-lingual, cross-disease clinical voice biomarker benchmark. It defines 18 subject-disjoint evaluation tasks (16 within-corpus + 2 cross-lingual LODO) over five existing corpora (Bridge2AI-Voice v3.0, NeuroVoz, SVD, E-DAIC, MODMA) across four languages (English, Spanish, German, Mandarin). The benchmark ships subject-ID manifests, an evaluation harness (DeLong AUROC comparison, paired bootstrap, Holm-Bonferroni correction), per-seed prediction archives for four reference baselines, and a datasheet. Raw audio is NOT redistributed; users obtain each corpus directly from its upstream provider via the voxbench fetch CLI (credential-gated per upstream DUA). Anonymous submission for NeurIPS 2026 Evaluations & Datasets Track.",
+  "url": "https://huggingface.co/datasets/voice-bench-submission/voxclinbench",
+  "sameAs": "https://github.com/voice-bench-submission/voxclinbench",
+  "version": "0.3.0",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": [
+    "https://opensource.org/licenses/MIT",
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "keywords": [
+    "clinical voice biomarkers",
+    "benchmark",
+    "self-supervised learning",
+    "speech",
+    "cross-lingual",
+    "depression",
+    "Parkinson's disease",
+    "voice pathology"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Anonymous (NeurIPS 2026 double-blind submission)"
+  },
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "github-repo",
+      "name": "github-repo",
+      "description": "Anonymous GitHub mirror of the voxbench evaluation harness and reference baselines.",
+      "contentUrl": "https://github.com/voice-bench-submission/voxclinbench",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "hf-dataset",
+      "name": "hf-dataset",
+      "description": "Hugging Face Datasets mirror of benchmark manifests, Croissant metadata, datasheet, and reference baseline predictions.",
+      "contentUrl": "https://huggingface.co/datasets/voice-bench-submission/voxclinbench",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "tasks",
+      "name": "tasks",
+      "description": "The 18 live VoxClinBench tasks (16 within-corpus + 2 cross-lingual LODO; A15 and B2-B5 retracted, see datasheet), each with a pseudonymous subject-ID split across five seeds. Labels and raw audio are NOT included: they reside with the upstream providers under each corpus's native DUA.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "tasks/task_id",
+          "name": "task_id",
+          "description": "Task identifier (e.g., b2ai.parkinsons, neurovoz.parkinsons, lodo.dep.test_modma).",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tasks/corpus",
+          "name": "corpus",
+          "description": "Upstream corpus: bridge2ai | neurovoz | svd | edaic | modma.",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tasks/language",
+          "name": "language",
+          "description": "ISO 639-1 language code.",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tasks/family",
+          "name": "family",
+          "description": "Sub-leaderboard family: A (physical/motor/laryngeal/respiratory) or B (psychiatric).",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tasks/upstream_license",
+          "name": "upstream_license",
+          "description": "License of the upstream corpus, not of this benchmark repository.",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tasks/fetch_command",
+          "name": "fetch_command",
+          "description": "CLI command to obtain the upstream audio after credential verification: voxbench fetch <corpus>.",
+          "dataType": "sc:Text"
+        }
+      ]
+    }
+  ],
+  "citeAs": "Anonymous (2026). VoxClinBench: a cross-lingual, cross-disease clinical voice biomarker benchmark. NeurIPS 2026 Evaluations & Datasets Track (under review).",
+  "datePublished": "2026-05-06",
+  "rai:dataCollection": "VoxClinBench does not collect new voice data. All six upstream corpora were collected by their respective teams under their own IRB / institutional approvals; see each corpus's canonical citation (documented in the accompanying datasheet).",
+  "rai:dataCollectionType": "Not applicable (benchmark over existing corpora)",
+  "rai:dataUseCases": [
+    "Benchmarking self-supervised speech representations on clinical voice biomarkers.",
+    "Auditing cross-lingual generalisation of clinical voice models.",
+    "Tracking community progress under a single subject-disjoint protocol."
+  ],
+  "rai:dataBiases": "VoxClinBench mirrors the demographic distribution of its six upstream corpora. English dominates by subject count (~72%). Sex and age balance vary per disease (e.g., Parkinson's skews older male). Ethnicity and race are not uniformly reported across upstream corpora and are NOT included in VoxClinBench manifests. Preliminary per-subgroup fairness analyses appear in the companion paper supplementary Section 11.",
+  "rai:personalSensitiveInformation": "This benchmark does NOT redistribute raw audio, demographic metadata, or per-subject diagnostic labels. The subject-ID manifests contain only pseudonymous identifiers issued by each upstream provider; these identifiers alone cannot be used to re-identify individuals without access to the credentialed upstream dataset.",
+  "rai:dataLimitations": "Per-task positive subject counts range from 23 to 213, producing wide bootstrap confidence intervals on tasks below n_pos=50 (the T2 diagnostic tier in Table 2 of the companion paper). Cross-corpus deltas against out-of-benchmark cohorts (FEMH, DVBIC, ADReSSo) are reported as directional only; cross-lingual leave-one-dataset-out (B1-B6) is the head-to-head substitute.",
+  "rai:dataReleaseMaintenancePlan": "Three-year maintenance commitment from the first-author institution: quarterly regression tests of voxbench fetch against each upstream provider's credential endpoint, 14-day hot-patch SLA on any API break, semver-tracked task registry with backward-compatible scoring, and signed Zenodo snapshots per release. Pull requests for new baselines and submissions are accepted via the anonymous GitHub mirror."
+}
