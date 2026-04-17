@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use VoxClinBench, please cite the companion paper."
 title: "VoxClinBench"
-version: "0.2.0"
-date-released: "2026-04-13"
+version: "0.4.1"
+date-released: "2026-04-16"
 license: MIT
 repository-code: "https://github.com/voice-bench-submission/voxclinbench"
 authors:

@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "voxbench"
-version = "0.2.0"
-description = "VoxClinBench — cross-lingual, cross-disease clinical voice biomarker benchmark"
+version = "0.4.1"
+description = "VoxClinBench — cross-lingual, cross-disease clinical voice biomarker benchmark; 24 tasks (23 scored + 1 zero-shot cross-lingual reference) across 5 corpora / 4 languages (en, es, de, zh)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

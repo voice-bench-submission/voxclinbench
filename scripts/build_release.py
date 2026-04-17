@@ -38,16 +38,40 @@ FORBIDDEN = {
 # columns we KEEP as probability
 PROB_COLS = re.compile(r"^(prob|pred|predicted|probability|score_main|p_|logit)", re.I)
 
-# Map artifact directory name patterns to canonical task_id
+# Map artifact directory name patterns to canonical task_id.
+# NOTE (v0.3.2, 2026-04-16): cross-lingual transfer is no longer a
+# benchmark task category. Artifacts from legacy "LODO"-labelled runs
+# (external_transfer_svd_*, neurovoz_transfer_*, modma_reverse,
+# 3mod_external_eval) are intentionally not exported here: the
+# external-cohort rows they map to (A9 NeuroVoz, A10 SVD, A24 MODMA)
+# are shipped via their own within-cohort evaluation artifacts.
+# Submitters disclose which corpora they trained on as submission
+# metadata; the benchmark does not rank LODO rows.
+#
+# NOTE (v0.3.3, 2026-04-16): the composite B2AI ``psychiatric_history``
+# label (old A12 under v0.3.3 numbering) is excluded from scored tasks
+# (positives are a union of the A19-A21 depression/PTSD/ADHD self-reports
+# in the same cohort -- not an independent biomarker). No dedicated
+# ``psychiatric_history`` prediction CSV has ever been released. The
+# upstream training pipeline still emits auxiliary ``psychiatric_history``
+# logits as part of its multi-task head; if an artifact CSV happens to
+# include a ``psychiatric_history`` column alongside scored-task
+# probabilities, it is filtered out by the column-name deny list above
+# and is not promoted to a standalone release CSV.
+#
+# NOTE (v0.4.0, 2026-04-16): task-roster expansion adds nine SVD German
+# pathology rows (A10 vf_paralysis ... A18 vf_polyp) and E-DAIC PTSD
+# row A23. Pilot prediction artifacts for these live under
+# ``artifacts/modal_sync/svd_pilot_xlsr_20260416/`` and
+# ``artifacts/modal_sync/svd_extend_xlsr_20260416/``; promotion to
+# canonical ``svd.<pathology>.seed<s>.<baseline>.csv`` entries follows
+# in v0.4.1 once all 5 seeds land. Two SVD pathologies were intentionally
+# scoped out for falling below n_pos >= 40: svd.leukoplakia (n_pos=34)
+# and svd.presbyphonia (n_pos=39 + age-HC confound).
 DIR_TO_TASK = [
-    (re.compile(r"external_transfer_svd_vf_paralysis"), "lodo.vfp.test_svd"),
-    (re.compile(r"external_transfer_svd_parkinsons"),   "lodo.pd.test_svd"),   # informal, not in 22
-    (re.compile(r"neurovoz_marvel|neurovoz_transfer|neurovoz_results"), "lodo.pd.test_neurovoz"),
-    (re.compile(r"modma_reverse"),                      "lodo.dep.test_modma_reverse"),
     (re.compile(r"modma_marvel"),                       "modma.depression"),
     (re.compile(r"main_v3_tier1"),                      "b2ai.tier1_aggregate"),
     (re.compile(r"main_v3_tier2"),                      "b2ai.tier2_aggregate"),
-    (re.compile(r"3mod_external_eval"),                 "depression.lodo.3mod"),
 ]
 
 def detect_task(path: Path) -> str | None:
