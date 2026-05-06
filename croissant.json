@@ -2,9 +2,11 @@
   "@context": {
     "@language": "en",
     "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
     "cr": "http://mlcommons.org/croissant/",
     "rai": "http://mlcommons.org/croissant/RAI/",
-    "sc": "https://schema.org/",
     "data": {
       "@id": "cr:data",
       "@type": "@json"
@@ -12,6 +14,11 @@
     "dataType": {
       "@id": "cr:dataType",
       "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
     },
     "extract": "cr:extract",
     "field": "cr:field",
@@ -31,10 +38,12 @@
     "regex": "cr:regex",
     "repeated": "cr:repeated",
     "replace": "cr:replace",
+    "sc": "https://schema.org/",
     "separator": "cr:separator",
     "source": "cr:source",
     "subField": "cr:subField",
-    "transform": "cr:transform"
+    "transform": "cr:transform",
+    "wd": "https://www.wikidata.org/wiki/"
   },
   "@type": "sc:Dataset",
   "name": "VoxClinBench",
@@ -87,90 +96,111 @@
       "@id": "svd-zenodo-archive",
       "name": "svd-zenodo-archive",
       "description": "Saarbruecken Voice Database (SVD) primary Zenodo archive; ZIPs per German-language pathology cohort. Not redistributed by voxbench; referenced only so submitters can verify the upstream source of the nine SVD pathology rows A10-A18. License CC-BY-4.0 per Zenodo record 16874898.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "contentUrl": "https://zenodo.org/records/16874898/files/data.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "8314013ccf4830ca732486206fbed9e6"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-vf-paralysis",
       "name": "svd-pathology-vf-paralysis",
-      "description": "SVD German pathology cohort: Stimmlippenlähmung (vocal fold paralysis). Scored row A10. Subject count: n_pos=213, n_neg=300 (shared SVD healthy pool).",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort (Saarland recording protocol filename: Rekurrensparese.zip — recurrent laryngeal nerve paresis, the leading etiology of unilateral vocal fold paralysis). Scored row A10. Subject count: n_pos=213, n_neg=300 (shared SVD healthy pool).",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Rekurrensparese.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "c9508746f31802b2ed49b4433fd15de3"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-hyperfunctional-dysphonia",
       "name": "svd-pathology-hyperfunctional-dysphonia",
-      "description": "SVD German pathology cohort: Hyperfunktionelle Dysphonie (hyperfunctional dysphonia). Scored row A11. Subject count: n_pos=199, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Hyperfunktionelle Dysphonie (hyperfunctional dysphonia). Scored row A11. n_pos=199, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Hyperfunktionelle%20Dysphonie.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "d90d6da2812815c21a8964661a69c28d"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-laryngitis",
       "name": "svd-pathology-laryngitis",
-      "description": "SVD German pathology cohort: Laryngitis. Scored row A12. Subject count: n_pos=128, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Laryngitis. Scored row A12. n_pos=128, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Laryngitis.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "cd24a85c8658d584c83c7af0877dd0a8"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-functional-dysphonia",
       "name": "svd-pathology-functional-dysphonia",
-      "description": "SVD German pathology cohort: Funktionelle Dysphonie (functional dysphonia). Scored row A13. Subject count: n_pos=108, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Funktionelle Dysphonie (functional dysphonia). Scored row A13. n_pos=108, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Funktionelle%20Dysphonie.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "3224c46eba997cc4eed28034b4c940f0"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-psychogenic-dysphonia",
       "name": "svd-pathology-psychogenic-dysphonia",
-      "description": "SVD German pathology cohort: Psychogene Dysphonie (psychogenic dysphonia). Scored row A14. Subject count: n_pos=80, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Psychogene Dysphonie (psychogenic dysphonia). Scored row A14. n_pos=80, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Psychogene%20Dysphonie.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "58a52ae73e69ebaad426311013bc5c69"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-contact-pachydermia",
       "name": "svd-pathology-contact-pachydermia",
-      "description": "SVD German pathology cohort: Kontaktpachydermie (contact pachydermia). Scored row A15. Subject count: n_pos=63, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Kontaktpachydermie (contact pachydermia). Scored row A15. n_pos=63, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Kontaktpachydermie.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "bccbae7de1c331d267527d5c134877cd"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-reinke-edema",
       "name": "svd-pathology-reinke-edema",
-      "description": "SVD German pathology cohort: Reinke Oedem (Reinke's edema). Scored row A16. Subject count: n_pos=54, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Reinke Ödem (Reinke's edema). Scored row A16. n_pos=54, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Reinke%20%C3%96dem.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "9e4db5992bb9f7e2bd7b11bf5ca42423"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-dysodia",
       "name": "svd-pathology-dysodia",
-      "description": "SVD German pathology cohort: Dysodie (dysodia, singing-voice disorder). Scored row A17. Subject count: n_pos=54, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Dysodie (dysodia, singing-voice disorder). Scored row A17. n_pos=54, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Dysodie.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "f01b3c3bcf69d76faa83415ef11b3044"
     },
     {
       "@type": "cr:FileObject",
       "@id": "svd-pathology-vf-polyp",
       "name": "svd-pathology-vf-polyp",
-      "description": "SVD German pathology cohort: Stimmlippenpolyp (vocal fold polyp). Scored row A18. Subject count: n_pos=40, n_neg=300.",
-      "contentUrl": "https://zenodo.org/record/16874898",
+      "description": "SVD German pathology cohort: Stimmlippenpolyp (vocal fold polyp). Scored row A18. n_pos=40, n_neg=300.",
+      "contentUrl": "https://zenodo.org/records/16874898/files/Stimmlippenpolyp.zip",
       "encodingFormat": "application/zip",
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "md5": "32992f4001925118cd3e2bd6b071ea9a"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tasks-csv",
+      "name": "tasks-csv",
+      "description": "VoxClinBench task registry CSV (23 scored tasks; columns: task_id, corpus, language, family, upstream_license, fetch_command). Generated from voxbench.tasks.list_scorable_tasks().",
+      "contentUrl": "https://github.com/voice-bench-submission/voxclinbench/raw/main/tasks.csv",
+      "encodingFormat": "text/csv",
+      "sha256": "860d336107107467e44cdc841a1110cc2598506175adabab0cd6034ca8719a85",
+      "md5": "0472225c2c83c3d19d5290a26e4b7a3b",
+      "contentSize": "2036 B"
     }
   ],
   "recordSet": [
@@ -178,54 +208,103 @@
       "@type": "cr:RecordSet",
       "@id": "tasks",
       "name": "tasks",
-      "description": "The 23 scored VoxClinBench tasks (11 within-Bridge2AI + 12 external-cohort: A9 NeuroVoz-es PD, A10-A18 nine SVD-de voice pathologies, A22 E-DAIC-en depression, A23 E-DAIC-en PTSD), each with a pseudonymous subject-ID split across five seeds. Two non-scored regression scoping entries are kept in the registry for reproducibility but do not define leaderboard rows: A24 E-DAIC PHQ-8 continuous regression (Pearson r / CCC) and A25 E-DAIC PCL-C severity regression (Pearson r / CCC, 17-85 range). The A24 MODMA Mandarin depression row is a zero-shot cross-lingual validation target and is outside the Holm family. Retraction ledger (v0.4.0): old A12 b2ai.psychiatric_history composite self-report excluded (union of A19-A21 positives, not independent); old A15 daicwoz.depression retracted (189/189 subset of E-DAIC); LODO B1/B6 rows removed (training-corpus choice is submission metadata, not benchmark-prescribed); svd.leukoplakia excluded (n_pos=34 < 40 scoring threshold); svd.presbyphonia excluded (n_pos=39 < 40 + age-HC confound). Labels and raw audio are NOT included: they reside with the upstream providers under each corpus's native DUA.",
+      "description": "The 23 scored VoxClinBench tasks (11 within-Bridge2AI A1-A8 + A19-A21 psychiatric, plus 12 external-cohort: A9 NeuroVoz-es PD, A10-A18 nine SVD-de voice pathologies, A22 E-DAIC-en depression, A23 E-DAIC-en PTSD). Subject-disjoint splits across 5 seeds. Excluded from scored registry: A24 modma.depression (zero-shot cross-lingual reference, outside Holm family), former composite A12 b2ai.psychiatric_history (union of A19-A21 positives), former A15 daicwoz.depression (subset of E-DAIC), svd.leukoplakia and svd.presbyphonia (n_pos < 40 scoring threshold).",
       "field": [
         {
           "@type": "cr:Field",
           "@id": "tasks/task_id",
           "name": "task_id",
-          "description": "Task identifier (e.g., b2ai.parkinsons, neurovoz.parkinsons, svd.hyperfunctional_dysphonia, edaic.depression, edaic.ptsd, modma.depression).",
-          "dataType": "sc:Text"
+          "description": "Task identifier (e.g., b2ai.parkinsons, neurovoz.parkinsons, svd.hyperfunctional_dysphonia, edaic.depression, edaic.ptsd).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tasks-csv"
+            },
+            "extract": {
+              "column": "task_id"
+            }
+          }
         },
         {
           "@type": "cr:Field",
           "@id": "tasks/corpus",
           "name": "corpus",
           "description": "Upstream corpus: bridge2ai | neurovoz | svd | edaic | modma.",
-          "dataType": "sc:Text"
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tasks-csv"
+            },
+            "extract": {
+              "column": "corpus"
+            }
+          }
         },
         {
           "@type": "cr:Field",
           "@id": "tasks/language",
           "name": "language",
           "description": "ISO 639-1 language code.",
-          "dataType": "sc:Text"
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tasks-csv"
+            },
+            "extract": {
+              "column": "language"
+            }
+          }
         },
         {
           "@type": "cr:Field",
           "@id": "tasks/family",
           "name": "family",
           "description": "Sub-leaderboard family: A (physical/motor/laryngeal/respiratory) or B (psychiatric).",
-          "dataType": "sc:Text"
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tasks-csv"
+            },
+            "extract": {
+              "column": "family"
+            }
+          }
         },
         {
           "@type": "cr:Field",
           "@id": "tasks/upstream_license",
           "name": "upstream_license",
-          "description": "License of the upstream corpus, not of this benchmark repository. E-DAIC PTSD rows (A23, A25) derive labels from the PCL-C questionnaire column in detailed_lables.csv: PTSD_label (binary, cutoff-based) for A23 and PTSD_severity (continuous PCL-C total, range 17-85) for A25; both are already present in the E-DAIC EULA release and are not new labels.",
-          "dataType": "sc:Text"
+          "description": "License of the upstream corpus, not of this benchmark repository.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tasks-csv"
+            },
+            "extract": {
+              "column": "upstream_license"
+            }
+          }
         },
         {
           "@type": "cr:Field",
           "@id": "tasks/fetch_command",
           "name": "fetch_command",
           "description": "CLI command to obtain the upstream audio after credential verification: voxbench fetch <corpus>.",
-          "dataType": "sc:Text"
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tasks-csv"
+            },
+            "extract": {
+              "column": "fetch_command"
+            }
+          }
         }
       ]
     }
   ],
   "citeAs": "Anonymous (2026). VoxClinBench: a cross-lingual, cross-disease clinical voice biomarker benchmark. NeurIPS 2026 Evaluations & Datasets Track (under review).",
+  "citation": "Anonymous (2026). VoxClinBench: a cross-lingual, cross-disease clinical voice biomarker benchmark. NeurIPS 2026 Evaluations & Datasets Track (under review).",
   "datePublished": "2026-04-16",
   "rai:dataCollection": "VoxClinBench does not collect new voice data. All five upstream corpora were collected by their respective teams under their own IRB / institutional approvals; see each corpus's canonical citation (documented in the accompanying datasheet).",
   "rai:dataCollectionType": "Not applicable (benchmark over existing corpora)",
@@ -237,5 +316,7 @@
   "rai:dataBiases": "VoxClinBench mirrors the demographic distribution of its five upstream corpora. English dominates by subject count (~60%); German is strongly represented by the nine SVD pathology rows (A10-A18) which share a single n_neg=300 healthy-subject pool. Sex and age balance vary per disease (e.g., Parkinson's skews older male; several SVD pathologies skew by age). Ethnicity and race are not uniformly reported across upstream corpora and are NOT included in VoxClinBench manifests. Preliminary per-subgroup fairness analyses appear in the companion paper supplementary Section 11.",
   "rai:personalSensitiveInformation": "This benchmark does NOT redistribute raw audio, demographic metadata, or per-subject diagnostic labels. The subject-ID manifests contain only pseudonymous identifiers issued by each upstream provider; these identifiers alone cannot be used to re-identify individuals without access to the credentialed upstream dataset. NeuroVoz manifests are NOT redistributed as CSV files in v0.4.0 because Zenodo record 10777657 is CC-BY-NC-ND-4.0 and the ND clause forbids redistributing derivatives; the benchmark ships a deterministic splitter script (``voxbench.splits.neurovoz_splitter``) that regenerates the same 80/20 subject split locally from the user's fetched NeuroVoz data.",
   "rai:dataLimitations": "Per-task positive subject counts range from 23 to 213, producing wide bootstrap confidence intervals on tasks below n_pos=50 (the T2 diagnostic tier in Table 2 of the companion paper). The nine SVD pathology rows (A10-A18) share a common n_neg=300 healthy-subject pool, which induces correlated baselines across these rows (accounted for via Holm-Bonferroni within Family A). Cross-corpus deltas against out-of-benchmark cohorts (FEMH, DVBIC, ADReSSo) are reported as directional only. The external-cohort rows A9 (NeuroVoz-es), A10-A18 (SVD-de), A22-A23 (E-DAIC-en), and the A24 MODMA-zh cross-lingual validation target exercise cross-population generalisation; training-corpus choice for these rows is submission-disclosed, not benchmark-prescribed. The composite A12 psychiatric_history self-report from Bridge2AI-Voice v3.0 is intentionally excluded from scored tasks because its positive set is the union of depression / PTSD / ADHD / anxiety / bipolar self-reports in the same cohort (A19-A21 in this benchmark) and therefore does not define an independent biomarker task; the label column remains in the upstream tsv and in our training-pipeline auxiliary heads. svd.leukoplakia (n_pos=34) and svd.presbyphonia (n_pos=39) were scoped out in v0.4.0 because they fall below the n_pos >= 40 scoring threshold; svd.presbyphonia additionally carries an age-HC confound (elderly-only cohort) that would produce misleadingly high AUROC.",
-  "rai:dataReleaseMaintenancePlan": "Three-year maintenance commitment from the first-author institution: quarterly regression tests of voxbench fetch against each upstream provider's credential endpoint, 14-day hot-patch SLA on any API break, semver-tracked task registry with backward-compatible scoring, and signed Zenodo snapshots per release. Pull requests for new baselines and submissions are accepted via the anonymous GitHub mirror."
+  "rai:dataReleaseMaintenancePlan": "Three-year maintenance commitment from the first-author institution: quarterly regression tests of voxbench fetch against each upstream provider's credential endpoint, 14-day hot-patch SLA on any API break, semver-tracked task registry with backward-compatible scoring, and signed Zenodo snapshots per release. Pull requests for new baselines and submissions are accepted via the anonymous GitHub mirror.",
+  "rai:dataSocialImpact": "VoxClinBench is built so that researchers can audit clinical voice biomarker models against subject-disjoint, cross-lingual, multi-disease evaluation. Positive social impact: reduces over-claiming on small in-language cohorts and surfaces the cross-population generalisation gap, both of which currently mask deployment risk in clinical voice AI. Risk to mitigate: per-task AUROC scores can be misread as deployment-ready accuracy. The benchmark therefore ships per-subgroup fairness analyses (Section 11 of the companion paper) and explicit subject-count thresholds (n_pos>=40) to discourage cherry-picking of underpowered tasks.",
+  "rai:hasSyntheticData": false
 }

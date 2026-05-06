@@ -1,0 +1,24 @@
+task_id,corpus,language,family,upstream_license,fetch_command
+b2ai.parkinsons,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.airway_stenosis,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.vf_paralysis,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.laryngeal_dystonia,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.cognitive_impair,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.benign_lesions,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.mtd,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.chronic_cough,bridge2ai,en,A,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+neurovoz.parkinsons,neurovoz,es,A,CC-BY-NC-ND-4.0 (Zenodo 10777657),voxbench fetch neurovoz
+svd.vf_paralysis,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.hyperfunctional_dysphonia,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.laryngitis,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.functional_dysphonia,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.psychogenic_dysphonia,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.contact_pachydermia,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.reinke_edema,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.dysodia,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+svd.vf_polyp,svd,de,A,CC-BY-4.0 (Zenodo 16874898),voxbench fetch svd
+b2ai.depression,bridge2ai,en,B,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.ptsd,bridge2ai,en,B,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+b2ai.adhd,bridge2ai,en,B,CC-BY-NC-SA-4.0 (Bridge2AI-Voice DUA),voxbench fetch bridge2ai
+edaic.depression,edaic,en,B,USC ICT E-DAIC EULA,voxbench fetch edaic
+edaic.ptsd,edaic,en,B,USC ICT E-DAIC EULA,voxbench fetch edaic

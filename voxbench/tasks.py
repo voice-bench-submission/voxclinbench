@@ -37,7 +37,7 @@ retraction ledger.
 
 SVD pathology tasks use the German pathology folder names from the
 Saarland SVD release (Zenodo record 16874898, CC-BY-4.0):
-- A10 vf_paralysis           <- Stimmlippenlähmung
+- A10 vf_paralysis           <- Rekurrensparese (RLN paresis; leading etiology of unilateral VF paralysis)
 - A11 hyperfunctional_dysphonia <- Hyperfunktionelle Dysphonie
 - A12 laryngitis             <- Laryngitis
 - A13 functional_dysphonia   <- Funktionelle Dysphonie
@@ -115,7 +115,7 @@ TASKS: tuple[Task, ...] = (
     # A10-A18: SVD external cohort pathologies (CC-BY-4.0, Zenodo 16874898)
     Task("svd.vf_paralysis",                "A", "external", "svd", "de",
          "Vocal fold paralysis",       "AUROC", None,    213,  300,
-         notes="SVD pathology: Stimmlippenlähmung."),
+         notes="SVD pathology: Rekurrensparese (recurrent laryngeal nerve paresis; leading etiology of unilateral VF paralysis). Saarland recording protocol files this cohort under Rekurrensparese.zip on Zenodo 16874898."),
     Task("svd.hyperfunctional_dysphonia",   "A", "external", "svd", "de",
          "Hyperfunctional dysphonia",  "AUROC", None,    199,  300,
          notes="SVD pathology: Hyperfunktionelle Dysphonie."),
