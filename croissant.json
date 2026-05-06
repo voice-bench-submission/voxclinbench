@@ -198,9 +198,9 @@
       "description": "VoxClinBench task registry CSV (23 scored tasks; columns: task_id, corpus, language, family, upstream_license, fetch_command). Generated from voxbench.tasks.list_scorable_tasks().",
       "contentUrl": "https://github.com/voice-bench-submission/voxclinbench/raw/main/tasks.csv",
       "encodingFormat": "text/csv",
-      "sha256": "860d336107107467e44cdc841a1110cc2598506175adabab0cd6034ca8719a85",
-      "md5": "0472225c2c83c3d19d5290a26e4b7a3b",
-      "contentSize": "2036 B"
+      "sha256": "e141af5692b9d5105d7b38ecc4ba838498c37dd6f34bac985836f8f62d955b64",
+      "md5": "7102a54f1a0c714cc05a988581457b36",
+      "contentSize": "2012 B"
     }
   ],
   "recordSet": [
